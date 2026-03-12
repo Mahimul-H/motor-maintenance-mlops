@@ -27,3 +27,9 @@ jobs:
     - name: Train and Validate Model
       run: |
         python src/train.py
+- name: Upload Trained Model Artifact
+      uses: actions/upload-artifact@v4
+      with:
+        name: motor-maintenance-model
+        path: models/motor_model.pkl
+        retention-days: 5

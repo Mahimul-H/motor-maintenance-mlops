@@ -4,6 +4,7 @@ import numpy as np
 import pandas as pd
 import os
 from datetime import datetime
+from src.monitor import check_data_drift
 
 # ============================================================================
 # PAGE CONFIGURATION & STYLING
@@ -307,6 +308,14 @@ else:
         probability = model.predict_proba(features)[0][1]  # Failure probability
         health_score = 100 - (probability * 100)
         
+        # Check for data drift
+        try:
+            baseline_df = pd.read_csv('data/motor_data.csv')
+            drift_warnings = check_data_drift(baseline_df, features)
+        except FileNotFoundError:
+            drift_warnings = []
+            st.warning("⚠️ Baseline data not found - cannot check for data drift")
+        
         st.divider()
         st.markdown("### 📈 Diagnostic Results")
         
@@ -359,6 +368,14 @@ else:
                 """,
                 unsafe_allow_html=True
             )
+        
+        # Data Drift Warnings
+        if drift_warnings:
+            st.divider()
+            st.markdown("### 📊 Data Drift Warning")
+            st.markdown("The following sensor readings are statistical outliers compared to the training data baseline:")
+            for warning in drift_warnings:
+                st.warning(warning)
         
         st.divider()
         

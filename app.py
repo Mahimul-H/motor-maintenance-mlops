@@ -376,7 +376,7 @@ else:
             ]
         }
         
-        st.dataframe(analysis_data, width="100%", hide_index=True)
+        st.dataframe(analysis_data, width='stretch', hide_index=True)
         
         # Recommendations
         st.markdown("### 💡 Recommendations")

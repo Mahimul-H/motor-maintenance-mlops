@@ -31,6 +31,11 @@ jobs:
       run: |
         # This will now work because streamlit/altair are compatible
         python src/train.py
+        # Check if model file was created
+        if [ ! -f models/motor_model.pkl ]; then
+          echo "Model file not generated correctly"
+          exit 1
+        fi
 
     - name: Upload Trained Model Artifact
       uses: actions/upload-artifact@v4

@@ -40,6 +40,11 @@ def train_model():
     model_path = os.path.join(MODEL_DIR, "motor_model.pkl")
     joblib.dump(model, model_path)
     print(f"💾 Model saved to: {model_path}")
+    
+    # 7. Check accuracy threshold
+    if acc < 0.80:
+        print("❌ Model accuracy below 80%, failing build")
+        exit(1)
 
 if __name__ == "__main__":
     train_model()

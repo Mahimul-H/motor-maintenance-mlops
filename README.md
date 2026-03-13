@@ -33,6 +33,7 @@ Build the image and execute the container:
 docker build -t motor-maintenance-app .
 docker run -p 8501:8501 motor-maintenance-app
 ```
+add docker deployment for Docker as well 
 
 ### Manual Installation
 1. Install dependencies:

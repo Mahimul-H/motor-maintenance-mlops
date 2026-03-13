@@ -1,6 +1,7 @@
 import streamlit as st
 import joblib
 import numpy as np
+import pandas as pd
 import os
 from datetime import datetime
 
@@ -296,12 +297,12 @@ else:
         st.divider()
         
         # Prediction Button
-        predict_button = st.button("🚀 ANALYZE MOTOR STATUS", use_container_width=True, key="predict_btn")
+        predict_button = st.button("🚀 ANALYZE MOTOR STATUS", key="predict_btn")
     
     # Prediction Results Section
     if predict_button:
         # Prepare features
-        features = np.array([[voltage, current, temp, vib]])
+        features = pd.DataFrame([[voltage, current, temp, vib]], columns=['voltage', 'current', 'temperature', 'vibration'])
         prediction = model.predict(features)
         probability = model.predict_proba(features)[0][1]  # Failure probability
         health_score = 100 - (probability * 100)

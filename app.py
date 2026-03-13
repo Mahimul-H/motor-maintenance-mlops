@@ -362,6 +362,24 @@ else:
         
         st.divider()
         
+        # Feature Importance Chart
+        st.markdown("### 🔍 Feature Importance")
+        st.markdown("This chart shows which sensors contributed most to the failure risk prediction:")
+        
+        # Calculate feature importance from model coefficients
+        importance_values = abs(model.coef_[0])
+        feature_names = ['Voltage', 'Current', 'Temperature', 'Vibration']
+        
+        # Create DataFrame for bar chart
+        importance_df = pd.DataFrame({
+            'Feature': feature_names,
+            'Importance': importance_values
+        }).set_index('Feature')
+        
+        st.bar_chart(importance_df)
+        
+        st.divider()
+        
         # Parameter Analysis Table
         st.markdown("### 📋 Sensor Parameter Analysis")
         

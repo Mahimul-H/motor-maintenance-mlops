@@ -33,7 +33,7 @@ def check_data_drift(baseline_df, current_df):
             if deviation > threshold:
                 direction = "high" if current_value > baseline_mean else "low"
                 warnings.append(
-                    f"⚠️ **{sensor.title()} Drift Detected**: Current reading ({current_value:.2f}) is "
+                    f"**{sensor.title()} Drift Detected**: Current reading ({current_value:.2f}) is "
                     f"significantly {direction} compared to baseline "
                     f"(mean: {baseline_mean:.2f}, ±2σ: {baseline_mean - threshold:.2f} to {baseline_mean + threshold:.2f})"
                 )
